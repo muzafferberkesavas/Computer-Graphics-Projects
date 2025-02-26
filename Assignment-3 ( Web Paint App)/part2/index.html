@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointer Lock API with Buttons</title>
+    <script src="triangulation.js" defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f0f0f0;
+            position: relative;
+        }
+        canvas {
+            border: 2px solid black;
+            display: block;
+            background: white;
+            cursor: pointer;
+        }
+        #buttonContainer {
+            position: absolute;
+            top: 130px;
+            left: calc(50% + 420px);
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .buttonRow {
+            display: flex;
+            gap: 0;
+        }
+        button, .colorButtonContainer {
+            width: 50px;
+            height: 30px;
+            background: #ccc;
+            color: #000;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            position: relative;
+        }
+        .colorButtonContainer {
+            padding: 0;
+            position: relative;
+        }
+        .colorPicker {
+            width: 40px;
+            height: 26px;
+            border: none;
+            outline: none;
+            background: transparent;
+            position: absolute;
+            top: 2px;
+            left: calc(50% - 20px);
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        .colorPicker::-webkit-color-swatch {
+            border: 1px solid #888;
+        }
+        .colorPicker::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        button:hover, .colorButtonContainer:hover {
+            background: #aaa;
+        }
+
+        .wideButton {
+            width: 150px;
+        }
+        .scaleContainer {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .scaleLabel {
+            margin-right: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .scaleSlider {
+            width: 200px;
+            height: 10px;
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            background: linear-gradient(to right, #0000ff 0%, #333 100%);
+        }
+
+        .scaleSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #333;
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+        .scaleSlider::-webkit-slider-thumb:hover {
+            background-color: #555;
+        }
+
+        .scaleSlider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #333;
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+        .scaleSlider::-moz-range-track {
+            background: linear-gradient(to right, #0000ff 0%, #333 100%);
+        }
+    </style>
+</head>
+<body>
+<canvas id="webglCanvas" width="800" height="600"></canvas>
+<div id="buttonContainer">
+    <div class="buttonRow">
+        <div class="colorButtonContainer">
+            <input type="color" id="colorPicker" class="colorPicker" value="#ff0000" title="Pick a color">
+        </div>
+        <button id="drawButton">Draw</button>
+        <button id="clearButton">Clear</button>
+    </div>
+    <div class="buttonRow">
+        <button id="rightButton">Right</button>
+        <button id="leftButton">Left</button>
+        <button id="upButton">Up</button>
+        <button id="downButton">Down</button>
+    </div>
+    <div class="buttonRow">
+        <button id="rotateClockwiseButton" class="wideButton">Clockwise</button>
+        <button id="rotateCounterclockwiseButton" class="wideButton">Counterclockwise</button>
+    </div>
+    <div class="scaleContainer">
+        <label for="scaleSlider" class="scaleLabel">Scale</label>
+        <input type="range" id="scaleSlider" class="scaleSlider" min="0.1" max="3" step="0.1" value="1">
+        <span id="scaleValue">1.0</span>
+    </div>
+    <div class="buttonRow">
+        <button id="fillButton">Fill</button>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
